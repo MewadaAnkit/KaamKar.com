@@ -6,12 +6,15 @@ const Port = process.env.PORT || 8000
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 
-
+const corsOptions = {
+  origin: ["http://localhost:5173", "https://kaamkar.netlify.app/"],
+  credentials: true
+};
 //Middlewares
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use(cookieParser());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use((err, req, res, next) => {
     const errorStatus = err.status || 500;
     const errorMessage = err.message || "Something went wrong!";
